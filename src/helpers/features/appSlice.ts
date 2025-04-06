@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { IAppSlice } from "./types";
 
 const initialState: IAppSlice = {
-  userPermissions: [],
+  userPermissions: [1],
 };
 
 export const appSlice = createSlice({
