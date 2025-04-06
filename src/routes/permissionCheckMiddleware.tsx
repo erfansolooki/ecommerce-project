@@ -39,7 +39,7 @@ export const PermissionCheckMiddleware = () => {
   }
 
   if (!isChecked) {
-    return <>you don not have required permission to access this page</>;
+    return <>you do not have required permission to access this page</>;
   }
 
   return (
