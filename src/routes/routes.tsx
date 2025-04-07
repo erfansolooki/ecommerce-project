@@ -4,6 +4,7 @@ import { ProtectedRoutes } from "./protectedRoutes";
 import { RedirectTo } from "./redirectTo";
 import { BASE_ROUTE, HOME_ROUTE } from "./routesVar";
 import { lazy } from "react";
+import { Layout } from "../layout";
 
 const HomePage = lazy(() =>
   import("../pages/home").then((page) => ({
@@ -23,11 +24,16 @@ export const Routes = createBrowserRouter([
         element: <ProtectedRoutes />,
         children: [
           {
-            element: <HomePage />,
-            path: HOME_ROUTE,
-            handle: {
-              permissions: [1],
-            },
+            element: <Layout />,
+            children: [
+              {
+                element: <HomePage />,
+                path: HOME_ROUTE,
+                handle: {
+                  permissions: [1],
+                },
+              },
+            ],
           },
         ],
       },
