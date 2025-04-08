@@ -3,6 +3,7 @@ import { IAppSlice } from "./types";
 
 const initialState: IAppSlice = {
   userPermissions: [1],
+  inShoppingCartCount: 0,
 };
 
 export const appSlice = createSlice({
@@ -10,6 +11,8 @@ export const appSlice = createSlice({
   initialState,
   reducers: {
     setUserPermissions: () => {},
+
+    setShoppingCartCount: () => {},
   },
 });
 
