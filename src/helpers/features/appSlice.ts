@@ -4,6 +4,7 @@ import { IAppSlice } from "./types";
 const initialState: IAppSlice = {
   userPermissions: [1],
   inShoppingCartCount: 0,
+  shoppingCart: [],
 };
 
 export const appSlice = createSlice({
@@ -12,7 +13,13 @@ export const appSlice = createSlice({
   reducers: {
     setUserPermissions: () => {},
 
-    setShoppingCartCount: () => {},
+    setShoppingCartCount: (state, action) => {
+      state.inShoppingCartCount = action.payload;
+    },
+
+    setShoppingCart: (state, action) => {
+      state.shoppingCart = action.payload;
+    },
   },
 });
 

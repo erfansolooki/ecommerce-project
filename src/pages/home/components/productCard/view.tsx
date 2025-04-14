@@ -1,27 +1,35 @@
 import { TbCurrencyDollar } from "react-icons/tb";
 import { CiHeart } from "react-icons/ci";
+import { IProductCard } from "./types";
 
-export const ProductCard = () => {
+export const ProductCard = ({ data, onClick }: IProductCard) => {
   return (
-    <div className="bg-[#232327] rounded-2xl">
-      <div></div>
-
+    <div
+      onClick={() => onClick(data)}
+      className="bg-[#232327] rounded-3xl cursor-pointer flex w-[430px]"
+    >
       <div>
-        <div>Snopy Headphone</div>
+        <img src={data.image} alt="" />
+      </div>
 
-        <div>Snopy SN- BT96 Pretty Back Bluetooth Headphone</div>
+      <div className="flex justify-center items-start flex-col px-2">
+        <div className="text-[13px] font-medium">{data.caption}</div>
 
-        <div>
-          <div>
+        <div className="text-[12px] py-4 text-[#C4C4C4]">
+          {data.description}
+        </div>
+
+        <div className="flex items-center justify-between w-full">
+          <div className="flex justify-center items-center">
             <div>
-              <TbCurrencyDollar />
+              <TbCurrencyDollar size={20} />
             </div>
 
-            <div>6599</div>
+            <div className="text-base">{data.price}</div>
           </div>
 
           <div>
-            <CiHeart />
+            <CiHeart size={20} />
           </div>
         </div>
       </div>
