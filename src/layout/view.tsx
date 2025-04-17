@@ -3,7 +3,7 @@ import { Header } from "./components/header";
 
 export const Layout = () => {
   return (
-    <div>
+    <div className="max-w-[700px] mx-auto pt-10">
       <Header />
 
       <Outlet />
