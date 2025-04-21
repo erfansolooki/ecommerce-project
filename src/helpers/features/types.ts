@@ -2,6 +2,7 @@ export interface IAppSlice {
   userPermissions: Array<number>;
   inShoppingCartCount: number;
   shoppingCart: Array<IProductData>;
+  isUserLoggedIn: boolean;
 }
 
 export interface IProductData {

@@ -5,6 +5,7 @@ const initialState: IAppSlice = {
   userPermissions: [1],
   inShoppingCartCount: 0,
   shoppingCart: [],
+  isUserLoggedIn: false,
 };
 
 export const appSlice = createSlice({

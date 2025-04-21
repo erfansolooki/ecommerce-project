@@ -1,7 +1,7 @@
 import UserInfoNamespace from "./namespace";
 import { UserIcon } from "@heroicons/react/24/outline";
-import { PrimaryButton } from "../../components/primaryBtn";
-import { SecondaryButton } from "../../components/secondaryBtn";
+import { ActionButtons } from "../../components/actionButtons";
+
 export const UserInfo = () => {
   return (
     <UserInfoNamespace>
@@ -12,8 +12,8 @@ export const UserInfo = () => {
         value=""
         onChange={() => {}}
       />
-      <SecondaryButton>Previous Step</SecondaryButton>
-      <PrimaryButton>Next Step</PrimaryButton>
+
+      <ActionButtons nextStepCallBack={() => {}} prevStepCallBack={() => {}} />
     </UserInfoNamespace>
   );
 };
