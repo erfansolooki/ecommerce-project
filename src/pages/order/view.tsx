@@ -21,8 +21,8 @@ export const Order = () => {
         />
       </div>
 
-      <div className="pt-8 h-full flex flex-col justify-start items-center relative w-full">
-        <div className="pb-8">
+      <div className="pt-6 h-full flex flex-col justify-start items-center relative w-full">
+        <div className="pb-6">
           <Header title="User Information" />
         </div>
 

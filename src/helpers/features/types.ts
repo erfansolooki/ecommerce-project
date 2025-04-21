@@ -3,6 +3,7 @@ export interface IAppSlice {
   inShoppingCartCount: number;
   shoppingCart: Array<IProductData>;
   isUserLoggedIn: boolean;
+  orderSteps: OrderSteps_Enum;
 }
 
 export interface IProductData {
@@ -11,4 +12,13 @@ export interface IProductData {
   caption: string;
   description: string;
   price: number;
+}
+
+export enum OrderSteps_Enum {
+  ShoppingCart = 1,
+  UserInfo = 2,
+  ReceiverInfo = 3,
+  DeliveryTime = 4,
+  DeliveryPrice = 5,
+  FinalConfirmation = 6,
 }

@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IAppSlice } from "./types";
+import { IAppSlice, OrderSteps_Enum } from "./types";
 
 const initialState: IAppSlice = {
   userPermissions: [1],
   inShoppingCartCount: 0,
   shoppingCart: [],
   isUserLoggedIn: false,
+  orderSteps: OrderSteps_Enum.ShoppingCart,
 };
 
 export const appSlice = createSlice({
@@ -20,6 +21,10 @@ export const appSlice = createSlice({
 
     setShoppingCart: (state, action) => {
       state.shoppingCart = action.payload;
+    },
+
+    setOrderStep: (state, action) => {
+      state.orderSteps = action.payload;
     },
   },
 });
