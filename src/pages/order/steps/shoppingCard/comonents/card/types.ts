@@ -1,5 +1,5 @@
-import { IProductData } from "../../../../../../helpers/features/types";
+import { IShoppingCard } from "../../../../../../helpers/features/types";
 
 export interface ICard {
-  data: IProductData;
+  data: IShoppingCard;
 }

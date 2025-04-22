@@ -9,6 +9,11 @@ export const Order = () => {
   const isUserLoggedIn = useSelector(
     (state: RootState) => state.app.isUserLoggedIn
   );
+
+  const shoppingCart = useSelector(
+    (state: RootState) => state.app.shoppingCart
+  );
+
   return (
     <div
       className="border border-[#424242] flex flex-col justify-center items-center 
@@ -27,7 +32,7 @@ export const Order = () => {
           <Header title="User Information" />
         </div>
 
-        <ShoppingCard data={null!} />
+        <ShoppingCard productData={shoppingCart} />
       </div>
     </div>
   );

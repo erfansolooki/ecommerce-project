@@ -1,1 +1,5 @@
-export interface IShoppingCard {}
+import { IShoppingCard } from "../../../../helpers/features/types";
+
+export interface IShoppingCardStep {
+  productData: IShoppingCard[];
+}

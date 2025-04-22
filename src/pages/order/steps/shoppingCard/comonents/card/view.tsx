@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ICard } from "./types";
 
 export const Card = ({ data }: ICard) => {
-  const [quantity, setQuantity] = useState(2);
+  const [quantity, setQuantity] = useState(data.quantity);
+
+  useEffect(() => {
+    setQuantity(data.quantity);
+  }, [data.quantity]);
 
   const increaseQuantity = () => setQuantity((q) => q + 1);
   const decreaseQuantity = () => setQuantity((q) => Math.max(1, q - 1));
@@ -11,10 +15,10 @@ export const Card = ({ data }: ICard) => {
     <div className="flex items-center justify-between p-4 w-full bg-transparent rounded-lg shadow">
       <div className="flex items-center space-x-4">
         <div className="w-10 h-10 bg-gray-200 flex items-center justify-center rounded">
-          {data?.image ? (
+          {data?.productData?.image ? (
             <img
-              src={data.image}
-              alt={data.caption}
+              src={data?.productData?.image}
+              alt={data?.productData?.caption}
               className="object-cover w-full h-full rounded"
             />
           ) : (
@@ -34,8 +38,12 @@ export const Card = ({ data }: ICard) => {
           )}
         </div>
         <div>
-          <p className="text-sm font-medium text-gray-700"> {data?.caption}</p>
-          <p className="text-xs text-gray-500">${data?.price?.toFixed(2)}</p>
+          <p className="text-sm font-medium text-gray-700">
+            {data?.productData?.caption}
+          </p>
+          <p className="text-xs text-gray-500">
+            ${data?.productData?.price?.toFixed(2)}
+          </p>
         </div>
       </div>
       <div className="flex items-center space-x-2">
