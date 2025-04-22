@@ -3,6 +3,7 @@ import { UserInfo } from "./steps/userInfo";
 import { Header } from "./components/header";
 import { useSelector } from "react-redux";
 import { RootState } from "../../helpers/features/store";
+import { ShoppingCard } from "./steps/shoppingCard";
 
 export const Order = () => {
   const isUserLoggedIn = useSelector(
@@ -26,7 +27,7 @@ export const Order = () => {
           <Header title="User Information" />
         </div>
 
-        <UserInfo />
+        <ShoppingCard data={null!} />
       </div>
     </div>
   );

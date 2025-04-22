@@ -8,16 +8,16 @@ export const UserInfo = () => {
       <div className="flex flex-col gap-y-4 w-80">
         <UserInfoNamespace.FormTextfield
           Icon={UserIcon}
-          label="Name"
-          placeholder="Enter your name"
+          label="FirstName"
+          placeholder="Enter your first name"
           value=""
           onChange={() => {}}
         />
 
         <UserInfoNamespace.FormTextfield
           Icon={UserIcon}
-          label="Email"
-          placeholder="Enter your Email"
+          label="LastName"
+          placeholder="Enter your last name"
           value=""
           onChange={() => {}}
         />
@@ -25,15 +25,15 @@ export const UserInfo = () => {
         <UserInfoNamespace.FormTextfield
           Icon={UserIcon}
           label="PhoneNumber"
-          placeholder="Enter your phoneNumber"
+          placeholder="Enter your phone number"
           value=""
           onChange={() => {}}
         />
 
         <UserInfoNamespace.FormTextfield
           Icon={UserIcon}
-          label="Address"
-          placeholder="Enter your address"
+          label="Email"
+          placeholder="Enter your email"
           value=""
           onChange={() => {}}
         />

@@ -1,9 +1,14 @@
 export interface IAppSlice {
   userPermissions: Array<number>;
   inShoppingCartCount: number;
-  shoppingCart: Array<IProductData>;
+  shoppingCart: Array<IShoppingCard>;
   isUserLoggedIn: boolean;
   orderSteps: OrderSteps_Enum;
+}
+
+export interface IShoppingCard {
+  productData: IProductData;
+  quantity: number;
 }
 
 export interface IProductData {

@@ -28,9 +28,40 @@ export const Home = () => {
   const shoppingCartCount = useSelector(
     (state: RootState) => state.app.inShoppingCartCount
   );
+  const shoppingCart = useSelector(
+    (state: RootState) => state.app.shoppingCart
+  );
 
-  const handleAddToShoppingCart = () => {
+  const handleAddToShoppingCart = (productData: IProductData) => {
     dispatch(appSlice.actions.setShoppingCartCount(shoppingCartCount + 1));
+
+    const isProductInCart = shoppingCart.find(
+      (item) => item.productData.id === productData.id
+    );
+
+    if (isProductInCart) {
+      dispatch(
+        appSlice.actions.setShoppingCart([
+          ...shoppingCart.filter(
+            (item) => item.productData.id !== productData.id
+          ),
+          {
+            productData,
+            quantity: isProductInCart.quantity + 1,
+          },
+        ])
+      );
+    } else {
+      dispatch(
+        appSlice.actions.setShoppingCart([
+          ...shoppingCart,
+          {
+            productData,
+            quantity: 1,
+          },
+        ])
+      );
+    }
   };
 
   return (
