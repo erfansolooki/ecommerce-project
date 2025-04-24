@@ -3,7 +3,7 @@ export interface IAppSlice {
   inShoppingCartCount: number;
   shoppingCart: Array<IShoppingCard>;
   isUserLoggedIn: boolean;
-  orderSteps: OrderSteps_Enum;
+  currentStep: OrderSteps_Enum;
 }
 
 export interface IShoppingCard {

@@ -6,7 +6,7 @@ const initialState: IAppSlice = {
   inShoppingCartCount: 0,
   shoppingCart: [],
   isUserLoggedIn: false,
-  orderSteps: OrderSteps_Enum.ShoppingCart,
+  currentStep: OrderSteps_Enum.ShoppingCart,
 };
 
 export const appSlice = createSlice({
@@ -24,7 +24,7 @@ export const appSlice = createSlice({
     },
 
     setOrderStep: (state, action) => {
-      state.orderSteps = action.payload;
+      state.currentStep = action.payload;
     },
   },
 });

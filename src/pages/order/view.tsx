@@ -4,6 +4,7 @@ import { Header } from "./components/header";
 import { useSelector } from "react-redux";
 import { RootState } from "../../helpers/features/store";
 import { ShoppingCard } from "./steps/shoppingCard";
+import { useStepsTitle } from "./hooks/useStepsTitle";
 
 export const Order = () => {
   const isUserLoggedIn = useSelector(
@@ -13,6 +14,8 @@ export const Order = () => {
   const shoppingCart = useSelector(
     (state: RootState) => state.app.shoppingCart
   );
+
+  const stepsTitle = useStepsTitle();
 
   return (
     <div
@@ -29,7 +32,7 @@ export const Order = () => {
 
       <div className="pt-6 h-full flex flex-col justify-start items-center relative w-full">
         <div className="pb-6">
-          <Header title="User Information" />
+          <Header title={stepsTitle} />
         </div>
 
         <ShoppingCard productData={shoppingCart} />
