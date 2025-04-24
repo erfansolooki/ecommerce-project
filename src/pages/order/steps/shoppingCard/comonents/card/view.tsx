@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { ICard } from "./types";
+import { TrashIcon } from "@heroicons/react/24/outline";
 
 export const Card = ({ data, setTempProductData }: ICard) => {
   const [quantity, setQuantity] = useState(data.quantity);
@@ -17,6 +18,13 @@ export const Card = ({ data, setTempProductData }: ICard) => {
 
   const increaseQuantity = () => setQuantity((q) => q + 1);
   const decreaseQuantity = () => setQuantity((q) => Math.max(1, q - 1));
+
+  const handleDelete = () => {
+    setTempProductData({
+      ...data,
+      quantity: 0,
+    });
+  };
 
   return (
     <div className="flex items-center justify-between p-4 w-full bg-transparent rounded-lg shadow">
@@ -58,7 +66,14 @@ export const Card = ({ data, setTempProductData }: ICard) => {
           onClick={decreaseQuantity}
           className="w-8 h-8 flex items-center justify-center bg-[#232327] rounded-full hover:opacity-80 cursor-pointer"
         >
-          <span className="text-xl leading-none">−</span>
+          {quantity > 1 ? (
+            <span className="text-xl leading-none">−</span>
+          ) : (
+            <TrashIcon
+              onClick={handleDelete}
+              className="w-3.5 h-3.5 text-white"
+            />
+          )}
         </button>
         <span className="text-base text-white px-2">{quantity}</span>
         <button

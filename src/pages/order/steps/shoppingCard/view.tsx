@@ -8,6 +8,8 @@ import { IShoppingCard } from "../../../../helpers/features/types";
 export const ShoppingCard = ({
   productData,
   updateShoppingCart,
+  prevPageCallBack,
+  nextStepCallBack,
 }: IShoppingCardStep) => {
   const [tempProductData, setTempProductData] = useState<IShoppingCard>(null!);
   const [tempProductDataList, setTempProductDataList] = useState<
@@ -15,13 +17,21 @@ export const ShoppingCard = ({
   >([]);
 
   useEffect(() => {
-    setTempProductDataList((prev) =>
-      prev.map((item) =>
-        item.productData.id === tempProductData.productData.id
-          ? { ...item, quantity: tempProductData.quantity }
-          : item
-      )
-    );
+    if (tempProductData?.quantity) {
+      setTempProductDataList((prev) =>
+        prev.map((item) =>
+          item.productData.id === tempProductData?.productData.id
+            ? { ...item, quantity: tempProductData?.quantity }
+            : item
+        )
+      );
+    } else {
+      setTempProductDataList((prev) =>
+        prev.filter(
+          (item) => item.productData.id !== tempProductData?.productData.id
+        )
+      );
+    }
   }, [tempProductData]);
 
   useEffect(() => {
@@ -39,7 +49,7 @@ export const ShoppingCard = ({
     0
   );
 
-  if (productData.length === 0) {
+  if (tempProductDataList.length === 0) {
     return (
       <div
         className="flex flex-col justify-center items-center gap-y-4 w-full 
@@ -48,7 +58,7 @@ export const ShoppingCard = ({
         No products in the shopping cart !
         <ActionButtons
           nextStepCallBack={() => {}}
-          prevStepCallBack={() => {}}
+          prevStepCallBack={prevPageCallBack}
           hasNextStep={false}
           secondaryButtonText="Go to Home"
         />
@@ -58,7 +68,7 @@ export const ShoppingCard = ({
   return (
     <div className="flex flex-col gap-y-4 w-full">
       <div className="h-[calc(100vh-440px)] overflow-y-auto">
-        {productData?.map((item) => (
+        {tempProductDataList?.map((item) => (
           <Card
             key={item.productData.id}
             data={item}
@@ -69,7 +79,11 @@ export const ShoppingCard = ({
 
       <TotalPrice totalPrice={totalPrice} />
 
-      <ActionButtons nextStepCallBack={() => {}} prevStepCallBack={() => {}} />
+      <ActionButtons
+        nextStepCallBack={nextStepCallBack}
+        prevStepCallBack={prevPageCallBack}
+        secondaryButtonText="Go to Home"
+      />
     </div>
   );
 };
