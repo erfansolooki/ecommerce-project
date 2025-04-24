@@ -1,8 +1,44 @@
+import { useEffect, useState } from "react";
 import { ActionButtons } from "../../components/actionButtons";
 import { Card } from "./comonents/card";
 import { IShoppingCardStep } from "./types";
 import { TotalPrice } from "./comonents/totalPrice";
-export const ShoppingCard = ({ productData }: IShoppingCardStep) => {
+import { IShoppingCard } from "../../../../helpers/features/types";
+
+export const ShoppingCard = ({
+  productData,
+  updateShoppingCart,
+}: IShoppingCardStep) => {
+  const [tempProductData, setTempProductData] = useState<IShoppingCard>(null!);
+  const [tempProductDataList, setTempProductDataList] = useState<
+    IShoppingCard[]
+  >([]);
+
+  useEffect(() => {
+    setTempProductDataList((prev) =>
+      prev.map((item) =>
+        item.productData.id === tempProductData.productData.id
+          ? { ...item, quantity: tempProductData.quantity }
+          : item
+      )
+    );
+  }, [tempProductData]);
+
+  useEffect(() => {
+    if (tempProductDataList.length > 0) {
+      updateShoppingCart(tempProductDataList);
+    }
+  }, [tempProductDataList]);
+
+  useEffect(() => {
+    setTempProductDataList(productData);
+  }, [productData]);
+
+  const totalPrice = productData.reduce(
+    (acc, item) => acc + item.productData.price * item.quantity,
+    0
+  );
+
   if (productData.length === 0) {
     return (
       <div
@@ -10,6 +46,12 @@ export const ShoppingCard = ({ productData }: IShoppingCardStep) => {
       text-base text-gray-500 h-full"
       >
         No products in the shopping cart !
+        <ActionButtons
+          nextStepCallBack={() => {}}
+          prevStepCallBack={() => {}}
+          hasNextStep={false}
+          secondaryButtonText="Go to Home"
+        />
       </div>
     );
   }
@@ -17,11 +59,15 @@ export const ShoppingCard = ({ productData }: IShoppingCardStep) => {
     <div className="flex flex-col gap-y-4 w-full">
       <div className="h-[calc(100vh-440px)] overflow-y-auto">
         {productData?.map((item) => (
-          <Card key={item.productData.id} data={item} />
+          <Card
+            key={item.productData.id}
+            data={item}
+            setTempProductData={setTempProductData}
+          />
         ))}
       </div>
 
-      <TotalPrice />
+      <TotalPrice totalPrice={totalPrice} />
 
       <ActionButtons nextStepCallBack={() => {}} prevStepCallBack={() => {}} />
     </div>

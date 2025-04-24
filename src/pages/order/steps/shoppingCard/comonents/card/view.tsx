@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react";
 import { ICard } from "./types";
 
-export const Card = ({ data }: ICard) => {
+export const Card = ({ data, setTempProductData }: ICard) => {
   const [quantity, setQuantity] = useState(data.quantity);
 
   useEffect(() => {
     setQuantity(data.quantity);
   }, [data.quantity]);
+
+  useEffect(() => {
+    setTempProductData({
+      ...data,
+      quantity,
+    });
+  }, [quantity]);
 
   const increaseQuantity = () => setQuantity((q) => q + 1);
   const decreaseQuantity = () => setQuantity((q) => Math.max(1, q - 1));

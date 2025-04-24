@@ -1,8 +1,7 @@
 import { TbCurrencyDollar } from "react-icons/tb";
+import { ITotalPrice } from "./types";
 
-// box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
-
-export const TotalPrice = () => {
+export const TotalPrice = ({ totalPrice }: ITotalPrice) => {
   return (
     <div
       className="bg-[#232327] rounded-2xl p-4 flex justify-between items-center
@@ -14,7 +13,7 @@ export const TotalPrice = () => {
         <span>
           <TbCurrencyDollar />
         </span>
-        <span>1000</span>
+        <span>{totalPrice}</span>
       </div>
     </div>
   );

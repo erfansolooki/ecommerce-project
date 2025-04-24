@@ -5,8 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { ORDER_ROUTE } from "../../../../../routes/routesVar";
 
 export const ShoppingCart = () => {
-  const { inShoppingCartCount } = useSelector((state: RootState) => state.app);
+  const { shoppingCart } = useSelector((state: RootState) => state.app);
   const navigate = useNavigate();
+
+  const inShoppingCartCount = shoppingCart.reduce(
+    (acc, item) => acc + item.quantity,
+    0
+  );
 
   return (
     <div

@@ -1,6 +1,5 @@
 export interface IAppSlice {
   userPermissions: Array<number>;
-  inShoppingCartCount: number;
   shoppingCart: Array<IShoppingCard>;
   isUserLoggedIn: boolean;
   currentStep: OrderSteps_Enum;

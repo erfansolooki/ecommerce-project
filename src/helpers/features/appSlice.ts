@@ -3,7 +3,6 @@ import { IAppSlice, OrderSteps_Enum } from "./types";
 
 const initialState: IAppSlice = {
   userPermissions: [1],
-  inShoppingCartCount: 0,
   shoppingCart: [],
   isUserLoggedIn: false,
   currentStep: OrderSteps_Enum.ShoppingCart,
@@ -14,10 +13,6 @@ export const appSlice = createSlice({
   initialState,
   reducers: {
     setUserPermissions: () => {},
-
-    setShoppingCartCount: (state, action) => {
-      state.inShoppingCartCount = action.payload;
-    },
 
     setShoppingCart: (state, action) => {
       state.shoppingCart = action.payload;

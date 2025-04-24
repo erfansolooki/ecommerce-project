@@ -1,12 +1,14 @@
 import { Stepper } from "./components/stepper";
 import { UserInfo } from "./steps/userInfo";
 import { Header } from "./components/header";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../helpers/features/store";
 import { ShoppingCard } from "./steps/shoppingCard";
 import { useStepsTitle } from "./hooks/useStepsTitle";
+import { appSlice } from "../../helpers/features/appSlice";
 
 export const Order = () => {
+  const dispatch = useDispatch();
   const isUserLoggedIn = useSelector(
     (state: RootState) => state.app.isUserLoggedIn
   );
@@ -14,6 +16,8 @@ export const Order = () => {
   const shoppingCart = useSelector(
     (state: RootState) => state.app.shoppingCart
   );
+
+  const currentStep = useSelector((state: RootState) => state.app.currentStep);
 
   const stepsTitle = useStepsTitle();
 
@@ -24,7 +28,7 @@ export const Order = () => {
     >
       <div className="border-b w-full border-b-[#424242] py-10">
         <Stepper
-          currentStep={1}
+          currentStep={currentStep}
           totalSteps={isUserLoggedIn ? 5 : 6}
           progressPercent={50}
         />
@@ -35,7 +39,12 @@ export const Order = () => {
           <Header title={stepsTitle} />
         </div>
 
-        <ShoppingCard productData={shoppingCart} />
+        <ShoppingCard
+          productData={shoppingCart}
+          updateShoppingCart={(data) => {
+            dispatch(appSlice.actions.setShoppingCart(data));
+          }}
+        />
       </div>
     </div>
   );

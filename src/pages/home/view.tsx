@@ -25,16 +25,11 @@ export const FAKE_DATA: IProductData[] = [
 
 export const Home = () => {
   const dispatch = useDispatch();
-  const shoppingCartCount = useSelector(
-    (state: RootState) => state.app.inShoppingCartCount
-  );
   const shoppingCart = useSelector(
     (state: RootState) => state.app.shoppingCart
   );
 
   const handleAddToShoppingCart = (productData: IProductData) => {
-    dispatch(appSlice.actions.setShoppingCartCount(shoppingCartCount + 1));
-
     const isProductInCart = shoppingCart.find(
       (item) => item.productData.id === productData.id
     );
