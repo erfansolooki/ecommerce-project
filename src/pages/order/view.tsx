@@ -9,6 +9,8 @@ import { appSlice } from "../../helpers/features/appSlice";
 import { OrderSteps_Enum } from "../../helpers/features/types";
 import { HOME_ROUTE } from "../../routes/routesVar";
 import { useNavigate } from "react-router-dom";
+import { ReceiverInfo } from "./steps/receiverInfo";
+
 export const Order = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -29,6 +31,10 @@ export const Order = () => {
       case OrderSteps_Enum.ShoppingCart:
         dispatch(appSlice.actions.setOrderStep(OrderSteps_Enum.UserInfo));
         break;
+
+      case OrderSteps_Enum.UserInfo:
+        dispatch(appSlice.actions.setOrderStep(OrderSteps_Enum.ReceiverInfo));
+        break;
     }
   }
 
@@ -39,6 +45,10 @@ export const Order = () => {
         break;
       case OrderSteps_Enum.UserInfo:
         dispatch(appSlice.actions.setOrderStep(OrderSteps_Enum.ShoppingCart));
+        break;
+
+      case OrderSteps_Enum.ReceiverInfo:
+        dispatch(appSlice.actions.setOrderStep(OrderSteps_Enum.UserInfo));
         break;
     }
   }
@@ -58,7 +68,15 @@ export const Order = () => {
         );
 
       case OrderSteps_Enum.UserInfo:
-        return <UserInfo />;
+        return (
+          <UserInfo
+            prevPageCallBack={prevStepCallBack}
+            nextStepCallBack={nextStepCallBack}
+          />
+        );
+
+      case OrderSteps_Enum.ReceiverInfo:
+        return <ReceiverInfo />;
 
       default:
         break;

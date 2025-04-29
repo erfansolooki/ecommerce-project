@@ -1,0 +1,1 @@
+export { ReceiverInfo } from "./view";

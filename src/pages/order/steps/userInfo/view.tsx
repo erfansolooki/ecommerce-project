@@ -1,8 +1,12 @@
 import UserInfoNamespace from "./namespace";
 import { UserIcon } from "@heroicons/react/24/outline";
 import { ActionButtons } from "../../components/actionButtons";
+import { IUserInfoForm } from "./types";
 
-export const UserInfo = () => {
+export const UserInfo = ({
+  nextStepCallBack,
+  prevPageCallBack,
+}: IUserInfoForm) => {
   return (
     <UserInfoNamespace>
       <div className="flex flex-col gap-y-4 w-80">
@@ -39,7 +43,10 @@ export const UserInfo = () => {
         />
       </div>
 
-      <ActionButtons nextStepCallBack={() => {}} prevStepCallBack={() => {}} />
+      <ActionButtons
+        nextStepCallBack={nextStepCallBack}
+        prevStepCallBack={prevPageCallBack}
+      />
     </UserInfoNamespace>
   );
 };
