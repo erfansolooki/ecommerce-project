@@ -7,6 +7,7 @@ export const ActionButtons = ({
   prevStepCallBack,
   hasNextStep = true,
   secondaryButtonText = "Previous Step",
+  isDisbledPrimaryBtn,
 }: IActionButtons) => (
   <div className="flex w-full bottom-4 max-w-[700px] justify-between items-center absolute">
     <SecondaryButton onClick={prevStepCallBack}>
@@ -14,7 +15,9 @@ export const ActionButtons = ({
     </SecondaryButton>
 
     {hasNextStep ? (
-      <PrimaryButton onClick={nextStepCallBack}>Next Step</PrimaryButton>
+      <PrimaryButton onClick={nextStepCallBack} disabled={isDisbledPrimaryBtn}>
+        Next Step
+      </PrimaryButton>
     ) : (
       <></>
     )}

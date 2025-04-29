@@ -3,4 +3,5 @@ export interface IActionButtons {
   prevStepCallBack: () => void;
   hasNextStep?: boolean;
   secondaryButtonText?: string;
+  isDisbledPrimaryBtn?: boolean;
 }

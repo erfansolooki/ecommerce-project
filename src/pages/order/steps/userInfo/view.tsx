@@ -9,7 +9,7 @@ export const UserInfo = ({
   prevPageCallBack,
   initialData,
 }: IUserInfoForm) => {
-  const { formData, handleChange } = useOperation(initialData);
+  const { formData, handleChange, isFormComplete } = useOperation(initialData);
 
   return (
     <UserInfoNamespace>
@@ -56,6 +56,7 @@ export const UserInfo = ({
       </div>
 
       <ActionButtons
+        isDisbledPrimaryBtn={!isFormComplete}
         nextStepCallBack={() => nextStepCallBack(formData)}
         prevStepCallBack={prevPageCallBack}
       />
