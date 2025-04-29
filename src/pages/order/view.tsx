@@ -6,7 +6,7 @@ import { RootState } from "../../helpers/features/store";
 import { ShoppingCard } from "./steps/shoppingCard";
 import { useStepsTitle } from "./hooks/useStepsTitle";
 import { appSlice } from "../../helpers/features/appSlice";
-import { OrderSteps_Enum } from "../../helpers/features/types";
+import { IUserInfo, OrderSteps_Enum } from "../../helpers/features/types";
 import { HOME_ROUTE } from "../../routes/routesVar";
 import { useNavigate } from "react-router-dom";
 import { ReceiverInfo } from "./steps/receiverInfo";
@@ -14,17 +14,16 @@ import { ReceiverInfo } from "./steps/receiverInfo";
 export const Order = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isUserLoggedIn = useSelector(
-    (state: RootState) => state.app.isUserLoggedIn
+  const { currentStep, isUserLoggedIn, shoppingCart, userInfo } = useSelector(
+    (state: RootState) => state.app
   );
-
-  const shoppingCart = useSelector(
-    (state: RootState) => state.app.shoppingCart
-  );
-
-  const currentStep = useSelector((state: RootState) => state.app.currentStep);
 
   const stepsTitle = useStepsTitle();
+
+  const handleSubmitUserInfo = (data: IUserInfo) => {
+    dispatch(appSlice.actions.setUserInfo(data));
+    nextStepCallBack();
+  };
 
   function nextStepCallBack() {
     switch (currentStep) {
@@ -70,8 +69,9 @@ export const Order = () => {
       case OrderSteps_Enum.UserInfo:
         return (
           <UserInfo
+            initialData={userInfo ?? null!}
             prevPageCallBack={prevStepCallBack}
-            nextStepCallBack={nextStepCallBack}
+            nextStepCallBack={handleSubmitUserInfo}
           />
         );
 

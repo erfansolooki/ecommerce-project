@@ -3,6 +3,7 @@ export interface IAppSlice {
   shoppingCart: Array<IShoppingCard>;
   isUserLoggedIn: boolean;
   currentStep: OrderSteps_Enum;
+  userInfo: IUserInfo | undefined;
 }
 
 export interface IShoppingCard {
@@ -25,4 +26,11 @@ export enum OrderSteps_Enum {
   DeliveryTime = 4,
   DeliveryPrice = 5,
   FinalConfirmation = 6,
+}
+
+export interface IUserInfo {
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  email: string;
 }
