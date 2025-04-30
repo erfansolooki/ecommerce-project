@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ISearchableDropdown, IOption } from "./types";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 
@@ -11,10 +11,24 @@ const SearchableDropdown: React.FC<ISearchableDropdown> = ({
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const filteredOptions = options.filter((option) =>
     option.label.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const handleCloseOutside = (e: MouseEvent) => {
+    if (!dropdownRef.current?.contains(e.target as Node)) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleCloseOutside);
+    return () => {
+      document.removeEventListener("click", handleCloseOutside);
+    };
+  }, []);
 
   const handleSelect = (option: IOption) => {
     setSearchTerm(option.label);
@@ -26,6 +40,7 @@ const SearchableDropdown: React.FC<ISearchableDropdown> = ({
     <div className="relative w-80 text-white">
       <label className="text-sm pb-1 font-semibold text-white">{label}</label>
       <div
+        ref={dropdownRef}
         className="flex items-center border border-gray-500 
         rounded-full px-4 cursor-text"
         onClick={() => setIsOpen(true)}

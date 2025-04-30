@@ -4,6 +4,7 @@ export interface IAppSlice {
   isUserLoggedIn: boolean;
   currentStep: OrderSteps_Enum;
   userInfo: IUserInfo | undefined;
+  receiverInfo: IReceiverInfo | undefined;
 }
 
 export interface IShoppingCard {
@@ -33,4 +34,11 @@ export interface IUserInfo {
   lastName: string;
   phoneNumber: string;
   email: string;
+}
+
+export interface IReceiverInfo {
+  province: string;
+  city: string;
+  address: string;
+  postalCode: string;
 }

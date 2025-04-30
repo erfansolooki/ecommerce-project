@@ -6,22 +6,31 @@ import { RootState } from "../../helpers/features/store";
 import { ShoppingCard } from "./steps/shoppingCard";
 import { useStepsTitle } from "./hooks/useStepsTitle";
 import { appSlice } from "../../helpers/features/appSlice";
-import { IUserInfo, OrderSteps_Enum } from "../../helpers/features/types";
+import {
+  IReceiverInfo,
+  IUserInfo,
+  OrderSteps_Enum,
+} from "../../helpers/features/types";
 import { HOME_ROUTE } from "../../routes/routesVar";
 import { useNavigate } from "react-router-dom";
 import { ReceiverInfo } from "./steps/receiverInfo";
+import { ReceiveDateAndTime } from "./steps/receiveDateAndTime";
 
 export const Order = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { currentStep, isUserLoggedIn, shoppingCart, userInfo } = useSelector(
-    (state: RootState) => state.app
-  );
+  const { currentStep, isUserLoggedIn, shoppingCart, userInfo, receiverInfo } =
+    useSelector((state: RootState) => state.app);
 
   const stepsTitle = useStepsTitle();
 
   const handleSubmitUserInfo = (data: IUserInfo) => {
     dispatch(appSlice.actions.setUserInfo(data));
+    nextStepCallBack();
+  };
+
+  const handleSubmitReceiverInfo = (data: IReceiverInfo) => {
+    dispatch(appSlice.actions.setReceiverInfo(data));
     nextStepCallBack();
   };
 
@@ -33,6 +42,10 @@ export const Order = () => {
 
       case OrderSteps_Enum.UserInfo:
         dispatch(appSlice.actions.setOrderStep(OrderSteps_Enum.ReceiverInfo));
+        break;
+
+      case OrderSteps_Enum.ReceiverInfo:
+        dispatch(appSlice.actions.setOrderStep(OrderSteps_Enum.DeliveryTime));
         break;
     }
   }
@@ -48,6 +61,10 @@ export const Order = () => {
 
       case OrderSteps_Enum.ReceiverInfo:
         dispatch(appSlice.actions.setOrderStep(OrderSteps_Enum.UserInfo));
+        break;
+
+      case OrderSteps_Enum.DeliveryTime:
+        dispatch(appSlice.actions.setOrderStep(OrderSteps_Enum.ReceiverInfo));
         break;
     }
   }
@@ -76,7 +93,16 @@ export const Order = () => {
         );
 
       case OrderSteps_Enum.ReceiverInfo:
-        return <ReceiverInfo />;
+        return (
+          <ReceiverInfo
+            initialData={receiverInfo ?? null!}
+            prevPageCallBack={prevStepCallBack}
+            nextStepCallBack={handleSubmitReceiverInfo}
+          />
+        );
+
+      case OrderSteps_Enum.DeliveryTime:
+        return <ReceiveDateAndTime />;
 
       default:
         break;
