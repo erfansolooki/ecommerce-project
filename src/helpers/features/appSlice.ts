@@ -1,10 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { IAppSlice } from "./types";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {
+  IAppSlice,
+  IReceiverInfo,
+  IShoppingCard,
+  IUserInfo,
+  OrderSteps_Enum,
+} from "./types";
 
 const initialState: IAppSlice = {
   userPermissions: [1],
-  inShoppingCartCount: 0,
   shoppingCart: [],
+  isUserLoggedIn: false,
+  currentStep: OrderSteps_Enum.ShoppingCart,
+  userInfo: undefined,
+  receiverInfo: undefined,
 };
 
 export const appSlice = createSlice({
@@ -13,12 +22,20 @@ export const appSlice = createSlice({
   reducers: {
     setUserPermissions: () => {},
 
-    setShoppingCartCount: (state, action) => {
-      state.inShoppingCartCount = action.payload;
+    setShoppingCart: (state, action: PayloadAction<Array<IShoppingCard>>) => {
+      state.shoppingCart = action.payload;
     },
 
-    setShoppingCart: (state, action) => {
-      state.shoppingCart = action.payload;
+    setOrderStep: (state, action: PayloadAction<OrderSteps_Enum>) => {
+      state.currentStep = action.payload;
+    },
+
+    setUserInfo: (state, action: PayloadAction<IUserInfo>) => {
+      state.userInfo = action.payload;
+    },
+
+    setReceiverInfo: (state, action: PayloadAction<IReceiverInfo>) => {
+      state.receiverInfo = action.payload;
     },
   },
 });

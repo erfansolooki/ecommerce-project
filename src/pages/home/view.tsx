@@ -25,12 +25,38 @@ export const FAKE_DATA: IProductData[] = [
 
 export const Home = () => {
   const dispatch = useDispatch();
-  const shoppingCartCount = useSelector(
-    (state: RootState) => state.app.inShoppingCartCount
+  const shoppingCart = useSelector(
+    (state: RootState) => state.app.shoppingCart
   );
 
-  const handleAddToShoppingCart = () => {
-    dispatch(appSlice.actions.setShoppingCartCount(shoppingCartCount + 1));
+  const handleAddToShoppingCart = (productData: IProductData) => {
+    const isProductInCart = shoppingCart.find(
+      (item) => item.productData.id === productData.id
+    );
+
+    if (isProductInCart) {
+      dispatch(
+        appSlice.actions.setShoppingCart([
+          ...shoppingCart.filter(
+            (item) => item.productData.id !== productData.id
+          ),
+          {
+            productData,
+            quantity: isProductInCart.quantity + 1,
+          },
+        ])
+      );
+    } else {
+      dispatch(
+        appSlice.actions.setShoppingCart([
+          ...shoppingCart,
+          {
+            productData,
+            quantity: 1,
+          },
+        ])
+      );
+    }
   };
 
   return (

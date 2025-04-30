@@ -10,6 +10,7 @@ export const PrimaryButton: React.FC<IPrimaryButton> = ({
       onClick={onClick}
       disabled={disabled}
       className={`w-36 py-2.5 text-white font-medium rounded-full transition-all
+        cursor-pointer
           ${
             disabled
               ? "bg-blue-300 cursor-not-allowed"
