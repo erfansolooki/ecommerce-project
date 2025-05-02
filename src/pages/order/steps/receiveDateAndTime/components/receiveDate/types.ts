@@ -4,6 +4,11 @@ export interface IReceiveDateCard {
   onClick: () => void;
 }
 
+export interface IReceiveDate {
+  initialData: DayInfo;
+  selectedDateCallback: (date: DayInfo) => void;
+}
+
 export interface DayInfo {
   day: number;
   month: string;

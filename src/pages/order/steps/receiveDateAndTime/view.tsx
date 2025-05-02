@@ -5,7 +5,7 @@ import { ActionButtons } from "../../components/actionButtons";
 export const ReceiveDateAndTime = () => {
   return (
     <div className="releative h-full w-full">
-      <ReceiveDate />
+      <ReceiveDate initialData={null!} selectedDateCallback={() => {}} />
       <PostCompanies />
       <ActionButtons nextStepCallBack={() => {}} prevStepCallBack={() => {}} />
     </div>

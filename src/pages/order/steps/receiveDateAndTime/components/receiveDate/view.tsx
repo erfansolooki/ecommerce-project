@@ -1,35 +1,73 @@
-import { DayInfo, IReceiveDateCard } from "./types";
+import { useEffect, useState } from "react";
+import { DayInfo, IReceiveDate, IReceiveDateCard } from "./types";
 import getNext7Days from "./utils/formatDate";
+import Slider from "react-slick";
 
 const ReceiveDateCard = ({ date, isSelected, onClick }: IReceiveDateCard) => {
   return (
-    <div className="flex flex-col gap-y-2">
-      <div className="flex flex-col gap-y-2">
-        <p>{date.day}</p>
-        <p>{date.month}</p>
-        <p>{date.weekday}</p>
+    <div
+      onClick={onClick}
+      className={`flex items-center justify-center flex-col 
+    gap-y-2 border rounded-xl w-28 h-18 cursor-pointer hover:border-white transition-all
+    ${isSelected ? "border-indigo-500" : "border-[#424242]"}`}
+    >
+      <div className="flex gap-1">
+        <p>{date.month}</p>-<p>{date.day}</p>
       </div>
+
+      <p>{date.weekday}</p>
     </div>
   );
 };
 
-export const ReceiveDate = () => {
+export const ReceiveDate = ({
+  initialData,
+  selectedDateCallback,
+}: IReceiveDate) => {
+  const [selectedCard, setSelectedCard] = useState<DayInfo>(null!);
   const days: DayInfo[] = getNext7Days();
 
-  console.log(days);
+  useEffect(() => {
+    initialData && setSelectedCard(initialData);
+  }, [initialData]);
+
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4.85,
+    slidesToScroll: 1.5,
+    nextArrow: <></>,
+    prevArrow: <></>,
+    responsive: [
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2.75,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
 
   return (
-    <div>
-      <ul>
-        {days.map((day, idx) => (
-          <ReceiveDateCard
-            key={idx}
-            date={day}
-            isSelected={false}
-            onClick={() => {}}
-          />
-        ))}
-      </ul>
+    <div className="border-b border-[#424242] p-3">
+      <div className="mb-4">Receive Date</div>
+      <div>
+        <Slider {...settings}>
+          {days.map((day, idx) => (
+            <ReceiveDateCard
+              key={idx}
+              date={day}
+              isSelected={selectedCard?.day === day.day}
+              onClick={() => {
+                setSelectedCard(day);
+                selectedDateCallback(day);
+              }}
+            />
+          ))}
+        </Slider>
+      </div>
     </div>
   );
 };
