@@ -15,12 +15,20 @@ import { HOME_ROUTE } from "../../routes/routesVar";
 import { useNavigate } from "react-router-dom";
 import { ReceiverInfo } from "./steps/receiverInfo";
 import { ReceiveDateAndTime } from "./steps/receiveDateAndTime";
+import { IReceiveDateAndCourierCompanyInitialData } from "./steps/receiveDateAndTime/types";
 
 export const Order = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { currentStep, isUserLoggedIn, shoppingCart, userInfo, receiverInfo } =
-    useSelector((state: RootState) => state.app);
+  const {
+    currentStep,
+    isUserLoggedIn,
+    shoppingCart,
+    userInfo,
+    receiverInfo,
+    courierCompany,
+    receiveDate,
+  } = useSelector((state: RootState) => state.app);
 
   const stepsTitle = useStepsTitle();
 
@@ -31,6 +39,14 @@ export const Order = () => {
 
   const handleSubmitReceiverInfo = (data: IReceiverInfo) => {
     dispatch(appSlice.actions.setReceiverInfo(data));
+    nextStepCallBack();
+  };
+
+  const handleSubmitReceiveData = (
+    data: IReceiveDateAndCourierCompanyInitialData
+  ) => {
+    dispatch(appSlice.actions.setCourierCompany(data.selectedCompany));
+    dispatch(appSlice.actions.setReceiveDate(data.selectedDate));
     nextStepCallBack();
   };
 
@@ -102,7 +118,16 @@ export const Order = () => {
         );
 
       case OrderSteps_Enum.DeliveryTime:
-        return <ReceiveDateAndTime />;
+        return (
+          <ReceiveDateAndTime
+            nextStepCallback={handleSubmitReceiveData}
+            prevStepCallback={prevStepCallBack}
+            data={{
+              selectedCompany: courierCompany!,
+              selectedDate: receiveDate!,
+            }}
+          />
+        );
 
       default:
         break;
@@ -117,7 +142,7 @@ export const Order = () => {
       <div className="border-b w-full border-b-[#424242] py-10">
         <Stepper
           currentStep={currentStep}
-          totalSteps={isUserLoggedIn ? 5 : 6}
+          totalSteps={isUserLoggedIn ? 4 : 5}
           progressPercent={50}
         />
       </div>

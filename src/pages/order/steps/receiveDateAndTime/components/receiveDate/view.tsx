@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { DayInfo, IReceiveDate, IReceiveDateCard } from "./types";
+import { IReceiveDate, IReceiveDateCard } from "./types";
 import getNext7Days from "./utils/formatDate";
 import Slider from "react-slick";
+import { ISelectedReceiveDate } from "../../../../../../helpers/features/types";
 
 const ReceiveDateCard = ({ date, isSelected, onClick }: IReceiveDateCard) => {
   return (
@@ -24,8 +25,8 @@ export const ReceiveDate = ({
   initialData,
   selectedDateCallback,
 }: IReceiveDate) => {
-  const [selectedCard, setSelectedCard] = useState<DayInfo>(null!);
-  const days: DayInfo[] = getNext7Days();
+  const [selectedCard, setSelectedCard] = useState<ISelectedReceiveDate>(null!);
+  const days: ISelectedReceiveDate[] = getNext7Days();
 
   useEffect(() => {
     initialData && setSelectedCard(initialData);

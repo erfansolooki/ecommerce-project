@@ -1,16 +1,12 @@
+import { ISelectedReceiveDate } from "../../../../../../helpers/features/types";
+
 export interface IReceiveDateCard {
-  date: DayInfo;
+  date: ISelectedReceiveDate;
   isSelected: boolean;
   onClick: () => void;
 }
 
 export interface IReceiveDate {
-  initialData: DayInfo;
-  selectedDateCallback: (date: DayInfo) => void;
-}
-
-export interface DayInfo {
-  day: number;
-  month: string;
-  weekday: string;
+  initialData: ISelectedReceiveDate;
+  selectedDateCallback: (date: ISelectedReceiveDate) => void;
 }

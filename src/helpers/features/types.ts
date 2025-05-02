@@ -5,6 +5,8 @@ export interface IAppSlice {
   currentStep: OrderSteps_Enum;
   userInfo: IUserInfo | undefined;
   receiverInfo: IReceiverInfo | undefined;
+  courierCompany: ICourierCompany | undefined;
+  receiveDate: ISelectedReceiveDate | undefined;
 }
 
 export interface IShoppingCard {
@@ -25,8 +27,7 @@ export enum OrderSteps_Enum {
   UserInfo = 2,
   ReceiverInfo = 3,
   DeliveryTime = 4,
-  DeliveryPrice = 5,
-  FinalConfirmation = 6,
+  FinalConfirmation = 5,
 }
 
 export interface IUserInfo {
@@ -41,4 +42,16 @@ export interface IReceiverInfo {
   city: string;
   address: string;
   postalCode: string;
+}
+
+export interface ISelectedReceiveDate {
+  day: number;
+  month: string;
+  weekday: string;
+}
+
+export interface ICourierCompany {
+  caption: string;
+  id: number;
+  price: number;
 }

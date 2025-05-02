@@ -1,7 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   IAppSlice,
+  ICourierCompany,
   IReceiverInfo,
+  ISelectedReceiveDate,
   IShoppingCard,
   IUserInfo,
   OrderSteps_Enum,
@@ -14,6 +16,8 @@ const initialState: IAppSlice = {
   currentStep: OrderSteps_Enum.ShoppingCart,
   userInfo: undefined,
   receiverInfo: undefined,
+  courierCompany: undefined,
+  receiveDate: undefined,
 };
 
 export const appSlice = createSlice({
@@ -36,6 +40,14 @@ export const appSlice = createSlice({
 
     setReceiverInfo: (state, action: PayloadAction<IReceiverInfo>) => {
       state.receiverInfo = action.payload;
+    },
+
+    setCourierCompany: (state, action: PayloadAction<ICourierCompany>) => {
+      state.courierCompany = action.payload;
+    },
+
+    setReceiveDate: (state, action: PayloadAction<ISelectedReceiveDate>) => {
+      state.receiveDate = action.payload;
     },
   },
 });
