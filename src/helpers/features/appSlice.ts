@@ -49,6 +49,14 @@ export const appSlice = createSlice({
     setReceiveDate: (state, action: PayloadAction<ISelectedReceiveDate>) => {
       state.receiveDate = action.payload;
     },
+
+    resetStore: (state) => {
+      state.shoppingCart = [];
+      state.userInfo = undefined;
+      state.receiverInfo = undefined;
+      state.courierCompany = undefined;
+      state.receiveDate = undefined;
+    },
   },
 });
 

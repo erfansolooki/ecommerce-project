@@ -74,6 +74,7 @@ export const Order = () => {
 
       case OrderSteps_Enum.FinalConfirmation:
         dispatch(appSlice.actions.setOrderStep(OrderSteps_Enum.SuccessPayment));
+        dispatch(appSlice.actions.resetStore());
         break;
     }
   }
@@ -158,6 +159,9 @@ export const Order = () => {
           <SuccessPayment
             submitCallback={() => {
               navigate(HOME_ROUTE);
+              dispatch(
+                appSlice.actions.setOrderStep(OrderSteps_Enum.ShoppingCart)
+              );
             }}
           />
         );

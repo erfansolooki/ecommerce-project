@@ -49,7 +49,7 @@ export const FinalConfirmation = ({
 
   return (
     <div className="w-full">
-      <div className="overflow-y-auto px-2 h-[278px]">
+      <div className="overflow-y-auto px-2 h-[calc(100vh-460px)]">
         <Products data={products} editCallback={editCallback} />
 
         <UserInfo data={userInfo} editCallback={editCallback} />
