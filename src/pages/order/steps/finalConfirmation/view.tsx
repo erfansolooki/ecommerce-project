@@ -5,6 +5,9 @@ import { appSlice } from "../../../../helpers/features/appSlice";
 import { OrderSteps_Enum } from "../../../../helpers/features/types";
 import { UserInfo } from "./components/userInfo";
 import { DeliveryInfo } from "./components/deliveryInfo";
+import { DeliveryDateAndCourierCompany } from "./components/deliveryDate";
+import { Price } from "./components/price";
+import { ActionButton } from "./components/actionButton";
 
 export const FinalConfirmation = ({
   courierCompany,
@@ -17,11 +20,38 @@ export const FinalConfirmation = ({
 
   const editCallback = (step: OrderSteps_Enum) => {};
 
+  const productsPrice = products.reduce(
+    (acc, item) => acc + item.productData.price * item.quantity,
+    0
+  );
+
   return (
     <div className="w-full">
-      <Products data={products} editCallback={editCallback} />
-      <UserInfo data={userInfo} editCallback={editCallback} />
-      <DeliveryInfo />
+      <div className="overflow-y-auto px-2 h-[278px]">
+        <Products data={products} editCallback={editCallback} />
+
+        <UserInfo data={userInfo} editCallback={editCallback} />
+
+        <DeliveryInfo data={receiverInfo} editCallback={editCallback} />
+
+        <DeliveryDateAndCourierCompany
+          courierCompany={courierCompany}
+          deliveryTime={receiveDate}
+          editCallback={editCallback}
+        />
+      </div>
+
+      <div className="p-2">
+        <Price
+          delveryPrice={courierCompany?.price}
+          productsPrice={productsPrice}
+        />
+
+        <ActionButton
+          submitCallback={() => {}}
+          totalPrice={productsPrice + courierCompany?.price}
+        />
+      </div>
     </div>
   );
 };
