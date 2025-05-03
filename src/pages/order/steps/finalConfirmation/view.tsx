@@ -4,6 +4,7 @@ import { IFinalConfirmation } from "./types";
 import { appSlice } from "../../../../helpers/features/appSlice";
 import { OrderSteps_Enum } from "../../../../helpers/features/types";
 import { UserInfo } from "./components/userInfo";
+import { DeliveryInfo } from "./components/deliveryInfo";
 
 export const FinalConfirmation = ({
   courierCompany,
@@ -20,6 +21,7 @@ export const FinalConfirmation = ({
     <div className="w-full">
       <Products data={products} editCallback={editCallback} />
       <UserInfo data={userInfo} editCallback={editCallback} />
+      <DeliveryInfo />
     </div>
   );
 };

@@ -4,4 +4,5 @@ export interface InputWithIconProps {
   value: string;
   onChange: (value: string) => void;
   Icon: React.ElementType; // Dynamic icon component
+  disabled?: boolean;
 }

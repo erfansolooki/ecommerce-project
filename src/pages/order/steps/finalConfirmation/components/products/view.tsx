@@ -5,7 +5,7 @@ import { IProdcuts } from "./types";
 
 export const Products = ({ data, editCallback }: IProdcuts) => {
   return (
-    <div>
+    <div className="border-b border-[#424242]">
       <Header
         callback={() => editCallback(OrderSteps_Enum.ShoppingCart)}
         caption="Purchased Products"

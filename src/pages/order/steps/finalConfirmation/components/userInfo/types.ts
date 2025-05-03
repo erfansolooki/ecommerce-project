@@ -7,3 +7,7 @@ export interface IUserInfoSection {
   data: IUserInfo;
   editCallback: (step: OrderSteps_Enum) => void;
 }
+
+export type IUserInfoFormContextType = {
+  children: React.ReactNode;
+};
