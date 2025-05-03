@@ -17,7 +17,7 @@ export const FinalConfirmation = ({
   const editCallback = (step: OrderSteps_Enum) => {};
 
   return (
-    <div>
+    <div className="w-full">
       <Products data={products} editCallback={editCallback} />
       <UserInfo data={userInfo} editCallback={editCallback} />
     </div>

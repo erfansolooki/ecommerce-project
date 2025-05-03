@@ -13,7 +13,7 @@ const initialState: IAppSlice = {
   userPermissions: [1],
   shoppingCart: [],
   isUserLoggedIn: false,
-  currentStep: OrderSteps_Enum.ShoppingCart,
+  currentStep: OrderSteps_Enum.FinalConfirmation,
   userInfo: undefined,
   receiverInfo: undefined,
   courierCompany: undefined,
