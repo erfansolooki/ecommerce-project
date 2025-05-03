@@ -18,7 +18,28 @@ export const FinalConfirmation = ({
 }: IFinalConfirmation) => {
   const dispatch = useDispatch();
 
-  const editCallback = (step: OrderSteps_Enum) => {};
+  const editCallback = (step: OrderSteps_Enum) => {
+    switch (step) {
+      case OrderSteps_Enum.ShoppingCart:
+        dispatch(appSlice.actions.setOrderStep(step));
+        break;
+
+      case OrderSteps_Enum.UserInfo:
+        dispatch(appSlice.actions.setOrderStep(step));
+        break;
+
+      case OrderSteps_Enum.ReceiverInfo:
+        dispatch(appSlice.actions.setOrderStep(step));
+        break;
+
+      case OrderSteps_Enum.DeliveryTime:
+        dispatch(appSlice.actions.setOrderStep(step));
+        break;
+
+      default:
+        break;
+    }
+  };
 
   const productsPrice = products.reduce(
     (acc, item) => acc + item.productData.price * item.quantity,
