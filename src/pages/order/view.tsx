@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import { ReceiverInfo } from "./steps/receiverInfo";
 import { ReceiveDateAndTime } from "./steps/receiveDateAndTime";
 import { IReceiveDateAndCourierCompanyInitialData } from "./steps/receiveDateAndTime/types";
+import { FinalConfirmation } from "./steps/finalConfirmation";
 
 export const Order = () => {
   const dispatch = useDispatch();
@@ -62,6 +63,12 @@ export const Order = () => {
 
       case OrderSteps_Enum.ReceiverInfo:
         dispatch(appSlice.actions.setOrderStep(OrderSteps_Enum.DeliveryTime));
+        break;
+
+      case OrderSteps_Enum.DeliveryTime:
+        dispatch(
+          appSlice.actions.setOrderStep(OrderSteps_Enum.FinalConfirmation)
+        );
         break;
     }
   }
@@ -128,6 +135,9 @@ export const Order = () => {
             }}
           />
         );
+
+      case OrderSteps_Enum.FinalConfirmation:
+        return <FinalConfirmation />;
 
       default:
         break;
