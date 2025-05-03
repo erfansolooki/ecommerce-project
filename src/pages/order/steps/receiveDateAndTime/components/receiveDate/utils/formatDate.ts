@@ -1,7 +1,7 @@
-import { DayInfo } from "../types";
+import { ISelectedReceiveDate } from "../../../../../../../helpers/features/types";
 
-const getNext7Days = (): DayInfo[] => {
-  const result: DayInfo[] = [];
+const getNext7Days = (): ISelectedReceiveDate[] => {
+  const result: ISelectedReceiveDate[] = [];
   const today = new Date();
   today.setDate(today.getDate() + 1); // Start from tomorrow
 

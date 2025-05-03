@@ -3,6 +3,12 @@ import { useSelector } from "react-redux";
 import { RootState } from "../helpers/features/store";
 import { Outlet, useMatches } from "react-router-dom";
 
+interface ICurrentRooute {
+  handle: {
+    permissions: Array<number>;
+  };
+}
+
 export const PermissionCheckMiddleware = () => {
   const [isChecked, setIsChecked] = useState<boolean | undefined>(undefined);
 
@@ -21,7 +27,7 @@ export const PermissionCheckMiddleware = () => {
     const currentRoute = routesData.find(
       (route) =>
         route.pathname === window.location.pathname && Boolean(route?.handle)
-    );
+    ) as ICurrentRooute | undefined;
 
     const isAllowed = currentRoute?.handle?.permissions?.some((module) =>
       userPermissions.some((userModule) => userModule === module)
