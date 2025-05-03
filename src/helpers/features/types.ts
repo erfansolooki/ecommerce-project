@@ -28,6 +28,7 @@ export enum OrderSteps_Enum {
   ReceiverInfo = 3,
   DeliveryTime = 4,
   FinalConfirmation = 5,
+  SuccessPayment = 6,
 }
 
 export interface IUserInfo {

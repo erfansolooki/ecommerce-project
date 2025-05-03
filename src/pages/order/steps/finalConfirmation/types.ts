@@ -12,4 +12,5 @@ export interface IFinalConfirmation {
   receiverInfo: IReceiverInfo;
   courierCompany: ICourierCompany;
   receiveDate: ISelectedReceiveDate;
+  submitCallback: () => void;
 }

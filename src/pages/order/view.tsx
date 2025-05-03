@@ -17,6 +17,7 @@ import { ReceiverInfo } from "./steps/receiverInfo";
 import { ReceiveDateAndTime } from "./steps/receiveDateAndTime";
 import { IReceiveDateAndCourierCompanyInitialData } from "./steps/receiveDateAndTime/types";
 import { FinalConfirmation } from "./steps/finalConfirmation";
+import { SuccessPayment } from "./steps/successPayment";
 
 export const Order = () => {
   const dispatch = useDispatch();
@@ -69,6 +70,10 @@ export const Order = () => {
         dispatch(
           appSlice.actions.setOrderStep(OrderSteps_Enum.FinalConfirmation)
         );
+        break;
+
+      case OrderSteps_Enum.FinalConfirmation:
+        dispatch(appSlice.actions.setOrderStep(OrderSteps_Enum.SuccessPayment));
         break;
     }
   }
@@ -139,11 +144,21 @@ export const Order = () => {
       case OrderSteps_Enum.FinalConfirmation:
         return (
           <FinalConfirmation
+            submitCallback={nextStepCallBack}
             courierCompany={courierCompany ?? null!}
             products={shoppingCart ?? []}
             receiveDate={receiveDate ?? null!}
             receiverInfo={receiverInfo ?? null!}
             userInfo={userInfo ?? null!}
+          />
+        );
+
+      case OrderSteps_Enum.SuccessPayment:
+        return (
+          <SuccessPayment
+            submitCallback={() => {
+              navigate(HOME_ROUTE);
+            }}
           />
         );
 

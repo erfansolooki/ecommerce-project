@@ -17,6 +17,8 @@ export const useStepsTitle = () => {
       return "Delivery Price";
     case OrderSteps_Enum.FinalConfirmation:
       return "Final Confirmation";
+    case OrderSteps_Enum.SuccessPayment:
+      return "Success Payment";
     default:
       return "Unknown Step";
   }

@@ -15,6 +15,7 @@ export const FinalConfirmation = ({
   receiveDate,
   receiverInfo,
   userInfo,
+  submitCallback,
 }: IFinalConfirmation) => {
   const dispatch = useDispatch();
 
@@ -69,7 +70,7 @@ export const FinalConfirmation = ({
         />
 
         <ActionButton
-          submitCallback={() => {}}
+          submitCallback={submitCallback}
           totalPrice={productsPrice + courierCompany?.price}
         />
       </div>
