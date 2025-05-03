@@ -137,7 +137,15 @@ export const Order = () => {
         );
 
       case OrderSteps_Enum.FinalConfirmation:
-        return <FinalConfirmation />;
+        return (
+          <FinalConfirmation
+            courierCompany={courierCompany ?? null!}
+            products={shoppingCart ?? []}
+            receiveDate={receiveDate ?? null!}
+            receiverInfo={receiverInfo ?? null!}
+            userInfo={userInfo ?? null!}
+          />
+        );
 
       default:
         break;
