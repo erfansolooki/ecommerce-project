@@ -13,10 +13,10 @@ export const useStepsTitle = () => {
       return "Receiver Information";
     case OrderSteps_Enum.DeliveryTime:
       return "Delivery Time";
-    case OrderSteps_Enum.DeliveryPrice:
-      return "Delivery Price";
     case OrderSteps_Enum.FinalConfirmation:
       return "Final Confirmation";
+    case OrderSteps_Enum.SuccessPayment:
+      return "Success Payment";
     default:
       return "Unknown Step";
   }

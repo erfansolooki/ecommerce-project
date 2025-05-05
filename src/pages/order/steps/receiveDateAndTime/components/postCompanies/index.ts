@@ -1,0 +1,1 @@
+export { PostCompanies } from "./view";
